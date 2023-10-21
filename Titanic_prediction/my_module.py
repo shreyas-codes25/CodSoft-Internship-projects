@@ -8,7 +8,7 @@ class TitanicSurvivalPredictor:
    
     def __init__(self):
         self.model = RandomForestClassifier(n_estimators=100, random_state=32)
-        self.features = ['Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Sex_male','Embarked_C' ,'Embarked_Q', 'Embarked_S', 'PassengerId']
+        self.features = ['Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Sex_male', 'Embarked_Q', 'Embarked_S', 'PassengerId']
 
     def preprocess_data(self, data):
         imputer = SimpleImputer(strategy='mean')
@@ -47,7 +47,6 @@ class TitanicSurvivalPredictor:
                 'Parch': parch,
                 'Fare': fare,
                 'Sex_male': 1 if sex == 'male' else 0,
-                'Embarked_C':1 if embarked == 'C' else 0,
                 'Embarked_Q': 1 if embarked == 'Q' else 0,
                 'Embarked_S': 1 if embarked == 'S' else 0,
                 'PassengerId': pid,
@@ -70,6 +69,6 @@ class TitanicSurvivalPredictor:
 
 if __name__ == "__main__": 
     predictor = TitanicSurvivalPredictor()
-    predictor.preprocess_data(pd.read_csv('tested.csv'))
+    predictor.preprocess_data(pd.read_csv('Titanic_prediction/tested.csv'))
     predictor.train_model()
     predictor.run_interactive_mode()
