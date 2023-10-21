@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
 
-data = pd.read_csv('tested.csv')
+data = pd.read_csv('Titanic_prediction/tested.csv')
 
 imputer = SimpleImputer(strategy='mean')
 data['Age'] = imputer.fit_transform(data[['Age']])
