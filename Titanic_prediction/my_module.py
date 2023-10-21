@@ -8,13 +8,13 @@ imputer = SimpleImputer(strategy='mean')
 data['Age'] = imputer.fit_transform(data[['Age']])
 data['Fare'] = imputer.fit_transform(data[['Fare']])
 
-# Extract the cabin letter from the 'Cabin' column
-data['Cabin'] = data['Cabin'].str.extract('([A-Za-z])')
+
 
 # Encode the 'Sex' and 'Embarked' columns using one-hot encoding
 data = pd.get_dummies(data, columns=['Sex', 'Embarked', 'Cabin'], drop_first=True)
 
-# Define the features, including 'PassengerId', 'Sex', 'Embarked', and 'Cabin'
+# Define the features 
+# 'Class', 'Age', Parch, Fare, SibSp, 'PassengerId', 'Sex', 'Embarked', and 'Cabin'
 features = ['Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Sex_male', 'Embarked_Q', 'Embarked_S', 'PassengerId']
 
 x = data[features]
