@@ -12,6 +12,6 @@ setup(
     author='Ghodake Shreyas',
     author_email='shreyasghodake999@gmail.com',
     description='Predicting Titanic Passenger Survival',
-    url='https://github.com/shreyas-codes25/CodSoft-Internship',
+    url='https://github.com/shreyas-codes25/CodSoft-Internship-projects',
     
 )
