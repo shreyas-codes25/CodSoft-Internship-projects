@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
+from sklearn.impute import SimpleImputer
 
 # Load the dataset
 data = pd.read_csv("Movie_Rating_Prediction\IMDbMoviesIndia.csv")
@@ -34,11 +35,20 @@ y = data["Rating"]
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+# Create an imputer to replace missing values with the mean of each column
+imputer = SimpleImputer(strategy='mean')
+
+# Fit and transform the imputer on your training data
+X_train_imputed = imputer.fit_transform(X_train)
+
+# Use the same imputer to transform your testing data
+X_test_imputed = imputer.transform(X_test)
+
 # Create a Linear Regression model
 model = LinearRegression()
 
-# Fit the model to the training data
-model.fit(X_train, y_train)
+# Fit the model to the imputed training data
+model.fit(X_train_imputed, y_train)
 
 # Function to predict movie rating
 def predict_movie_rating(movie_data, label_encoders):
