@@ -21,16 +21,12 @@ def preprocess_data(data):
         le = LabelEncoder()
         data[feature] = le.fit_transform(data[feature])
         label_encoders[feature] = le
-
     X = data[["Year", "Duration", "Genre", "Votes", "Director", "Actor 1", "Actor 2", "Actor 3"]]
     y = data["Rating"]
-
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     imputer = SimpleImputer(strategy='mean')
-
     X_train_imputed = imputer.fit_transform(X_train)
     X_test_imputed = imputer.transform(X_test)
-    
     model = LinearRegression()
     model.fit(X_train_imputed, y_train)
 
@@ -47,8 +43,8 @@ def predict_movie_rating(movie_data, model, label_encoders):
         label_encoders['Actor 3'].transform([movie_data['Actor 3']])[0],
         float(movie_data['Duration'])
     ]
-
     movie_rating = model.predict([user_movie_features])
+    
     return movie_rating[0]
 
 def main():
@@ -70,9 +66,9 @@ def main():
     except ValueError:
         print("Invalid input. Please enter numeric values for 'Year', 'Votes', and 'Duration'.")
         exit(1)
-
     predicted_rating = predict_movie_rating(user_movie_data, model, label_encoders)
-    print(f'The Predicted Movie May Get a Rating of: {predicted_rating:.2f}')
+    
+    print(f'\n\nThe Predicted Movie May Get a Rating of: {predicted_rating:.2f}')
 
 if __name__ == "__main__":
     main()
