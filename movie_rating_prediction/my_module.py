@@ -4,6 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
 from sklearn.impute import SimpleImputer
 
+
 # Load the dataset
 data = pd.read_csv("Movie_Rating_Prediction\IMDbMoviesIndia.csv")
 
@@ -55,7 +56,7 @@ def predict_movie_rating(movie_data, label_encoders):
     # Convert the user input features into the same format as the dataset
     user_movie_features = [
         float(movie_data['Year']),
-        label_encoders['Genre'].transform([movie_data['Genre']])[0],
+        label_encoders['Genre'].transform([movie_data['Genre'].capitalize()])[0],
         float(movie_data['Votes']),
         label_encoders['Director'].transform([movie_data['Director']])[0],
         label_encoders['Actor 1'].transform([movie_data['Actor 1']])[0],
@@ -86,4 +87,4 @@ except ValueError:
 
 # Predict the movie rating
 predicted_rating = predict_movie_rating(user_movie_data, label_encoders)
-print(f'Predicted Movie Rating: {predicted_rating:.2f}')
+print(f'\n\n\nThe Predicted Movie May Get a Rating of : {predicted_rating:.2f}\n\n')
